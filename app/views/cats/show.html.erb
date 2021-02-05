@@ -31,7 +31,7 @@
       <form action="<%= approve_cat_rental_request_url(id: request.id) %>" method="post">
         <input type="submit" value="Accept">
       </form>
-      <form action="<%= deny_cat_rental_request_url %>" method="post">
+      <form action="<%= deny_cat_rental_request_url(id: request.id) %>" method="post">
         <input type="submit" value="Reject">
       </form>
     <% end %>
