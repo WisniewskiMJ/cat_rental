@@ -29,6 +29,12 @@
           <input type="submit" value="Log in">
         </form>
       <% end %>
+
+      <% if !flash.empty? %>
+        <% flash.each do |category, message| %>
+          <div class='category' <p><%= message %></p> </div>
+        <% end %>
+      <% end %>
     </header>
 
     <%= yield %>

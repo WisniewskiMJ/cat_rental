@@ -42,6 +42,8 @@
 
 <br>
 
-<%= link_to 'Edit cat', edit_cat_url(@cat) %>
+<% if current_user && current_user.id == @cat.owner.id %>
+  <%= link_to 'Edit cat', edit_cat_url(@cat) %>
+<% end %>
 <br><br>
 <%= link_to 'Back to index', cats_url %>

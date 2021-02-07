@@ -1,5 +1,7 @@
 class CatsController < ApplicationController
 
+  before_action :require_user, except: [:index, :show]
+
   def index
     @cats = Cat.all
     render :index
@@ -21,7 +23,7 @@ class CatsController < ApplicationController
   end
 
   def create
-    @cat = Cat.new(cat_params)
+    @cat = current_user.cats.new(cat_params)
     if @cat.save
       redirect_to cat_url(@cat)
     else
@@ -30,16 +32,22 @@ class CatsController < ApplicationController
   end
 
   def edit
-    @cat = Cat.find_by(id: params[:id])
-    render :edit
+    @cat = current_user.cats.find_by(id: params[:id])
+    if @cat
+      render :edit
+    else
+      redirect_to cats_url
+    end
   end
 
   def update
-    @cat = Cat.find_by(id: params[:id])
-    if @cat.update_attributes(cat_params)
-      redirect_to cat_url(@cat)
-    else
-      render :edit
+    @cat = current_user.cats.find_by(id: params[:id])
+    if @cat
+      if @cat.update_attributes(cat_params)
+        redirect_to cat_url(@cat)
+      else
+        render :edit
+      end
     end
   end
 
@@ -48,4 +56,10 @@ class CatsController < ApplicationController
   def cat_params
     params.require(:cat).permit(:name, :birth_date, :color, :sex, :description)
   end
+
+  def require_owner
+    require_user
+    flash.now[:alert] = 'You have to be owner to edit a cat'
+  end
+
 end

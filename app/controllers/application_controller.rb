@@ -22,4 +22,9 @@ class ApplicationController < ActionController::Base
     redirect_to cats_url if current_user
   end
 
+  def require_user
+    flash[:alert] = 'You have to be logged in to access that section'
+    redirect_to cats_url if !current_user
+  end
+
 end
