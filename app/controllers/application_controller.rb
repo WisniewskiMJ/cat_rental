@@ -14,8 +14,12 @@ class ApplicationController < ActionController::Base
   end
 
   def logout
-    @current_user.reset_session_token if @current_user
+    current_user.reset_session_token if current_user
     session[:session_token] = nil
+  end
+
+  def require_no_user
+    redirect_to cats_url if current_user
   end
 
 end

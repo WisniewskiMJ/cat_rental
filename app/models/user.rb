@@ -7,6 +7,11 @@ class User < ApplicationRecord
   validates :session_token, presence: true, uniqueness: true
   validates :password, length: { minimum: 6, allow_nil: true }
 
+  has_many :cats
+  primary_key: :id
+  foreign_key: :user_id
+  class_name: :Cat
+
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
     return user if user && user.is_password?(password)

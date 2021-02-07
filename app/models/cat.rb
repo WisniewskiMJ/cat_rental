@@ -14,6 +14,12 @@ class Cat < ApplicationRecord
   validates :description, presence: true, length: { in: 3..300,
     too_long: "is too long",
     too_short: "is too short" }
+  validates :owner, presence: true
+
+  belongs_to :owner
+  primary_key: :id
+  foreign_key: :user_id
+  class_name: :User
 
   has_many :rental_requests,
   primary_key: :id,
