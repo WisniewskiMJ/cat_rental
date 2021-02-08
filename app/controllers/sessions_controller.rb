@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SessionsController < ApplicationController
   before_action :require_no_user, except: [:destroy]
 
@@ -20,5 +22,4 @@ class SessionsController < ApplicationController
     logout
     redirect_to cats_url
   end
-
 end

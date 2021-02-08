@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class CatRentalRequestsController < ApplicationController
   before_action :require_user
-  before_action :require_ownership, only: [:approve, :deny]
+  before_action :require_ownership, only: %i[approve deny]
 
   def new
     render :new
@@ -16,7 +18,7 @@ class CatRentalRequestsController < ApplicationController
   end
 
   def approve
-    @request =  CatRentalRequest.find_by(id: params[:id])
+    @request = CatRentalRequest.find_by(id: params[:id])
     @request.approve!
     redirect_to cat_url(@request[:cat_id])
   end
@@ -34,9 +36,8 @@ class CatRentalRequestsController < ApplicationController
   end
 
   def require_ownership
-    @request =  CatRentalRequest.find_by(id: params[:id])
+    @request = CatRentalRequest.find_by(id: params[:id])
     cat = @request.cat
-    redirect_to cats_url if !(current_user && cat.owner.id == current_user.id)
+    redirect_to cats_url unless current_user && cat.owner.id == current_user.id
   end
-
 end

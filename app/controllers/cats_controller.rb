@@ -1,6 +1,7 @@
-class CatsController < ApplicationController
+# frozen_string_literal: true
 
-  before_action :require_user, except: [:index, :show]
+class CatsController < ApplicationController
+  before_action :require_user, except: %i[index show]
 
   def index
     @cats = Cat.all
@@ -43,7 +44,7 @@ class CatsController < ApplicationController
   def update
     @cat = current_user.cats.find_by(id: params[:id])
     if @cat
-      if @cat.update_attributes(cat_params)
+      if @cat.update(cat_params)
         redirect_to cat_url(@cat)
       else
         render :edit
@@ -61,5 +62,4 @@ class CatsController < ApplicationController
     require_user
     flash.now[:alert] = 'You have to be owner to edit a cat'
   end
-
 end
