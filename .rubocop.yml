@@ -1,0 +1,10 @@
+require: rubocop-rails
+
+AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'bin/**/*'
+    - 'test/**/*'
+    - !ruby/regexp /old_and_unused\.rb$/
