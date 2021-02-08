@@ -26,8 +26,8 @@
 <ul>
   <% requests.each do |request| %>
   <li>
-    <%= "#{request.start_date} - #{request.end_date} id: #{request.id} cat id: #{request.cat_id}" %>
-    <% if request.status == 'PENDING' %>
+    <%= "#{request.start_date} - #{request.end_date} status: #{request.status}" %>
+    <% if request.status == 'PENDING' && current_user && current_user.id == @cat.owner.id %>
       <form action="<%= approve_cat_rental_request_url(id: request.id) %>" method="post">
         <input type="submit" value="Accept">
       </form>

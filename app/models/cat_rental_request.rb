@@ -19,12 +19,12 @@ class CatRentalRequest < ApplicationRecord
       raise 'not pending'
     else
       transaction do
+        overlapping_pending_requests.each do |r|
+          r.status = 'DENIED'
+          r.save
+        end
         self.status = 'APPROVED'
         self.save
-        overlapping_pending_requests.each do |request|
-          request.status = 'DENIED'
-          request.save
-        end
       end
     end
   end
@@ -42,8 +42,9 @@ class CatRentalRequest < ApplicationRecord
 
   def overlapping_requests
     CatRentalRequest.where('cat_id = ?', cat_id)
-                    .where.not('id = ? AND (start_date > ? OR end_date < ?)',
-                                id, end_date, start_date)
+                    .where.not('id = ?', id)
+                    .where.not('start_date > ? OR end_date < ?',
+                                end_date, start_date)
   end
 
   def overlapping_approved_requests
