@@ -3,6 +3,7 @@ class CatRentalRequest < ApplicationRecord
   STATUSES = %w(PENDING APPROVED DENIED)
 
   validates :cat_id, presence: true
+  validates :user_id, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true
   validates :status, presence: true, inclusion: { in: STATUSES }
@@ -13,6 +14,11 @@ class CatRentalRequest < ApplicationRecord
   primary_key: :id,
   foreign_key: :cat_id,
   class_name: :Cat
+
+  belongs_to :requester,
+  primary_key: :id,
+  foreign_key: :user_id,
+  class_name: :User
 
   def approve!
     if self.status != 'PENDING'
