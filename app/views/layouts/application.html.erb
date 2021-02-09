@@ -11,23 +11,27 @@
 
   <body>
 
-    <header>
+    <header class="navbar is-primary">
       <% if current_user %>
-        <h2>Hi <%= current_user.username %>!</h2>
-        <form action="<%= session_url %>" method="post">
-          <input type="hidden"
-                 name="authenticity_token"
-                 value="<%= form_authenticity_token %>">
-          <input type="hidden" name="_method" value="delete">
-          <input type="submit" value="Log out">
-        </form>
+        <div class="navbar-end">
+          <h2 class="navbar-item">Hi <%= current_user.username %>!</h2>
+          <form class="navbar-item" action="<%= session_url %>" method="post">
+            <input type="hidden"
+                   name="authenticity_token"
+                   value="<%= form_authenticity_token %>">
+            <input type="hidden" name="_method" value="delete">
+            <input class="button is-small" type="submit" value="Log out">
+          </form>
+        </div>
       <% else %>
-        <form action="<%= new_user_url %>">
-          <input type="submit" value="Register">
-        </form>
-        <form action="<%= new_session_url %>">
-          <input type="submit" value="Log in">
-        </form>
+        <div class="navbar-end">
+          <form class="navbar-item" action="<%= new_user_url %>">
+            <input class="button is-small" type="submit" value="Register">
+          </form>
+          <form class="navbar-item" action="<%= new_session_url %>">
+            <input class="button is-small" type="submit" value="Log in">
+          </form>
+        </div>
       <% end %>
 
       <% if !flash.empty? %>
