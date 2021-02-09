@@ -14,3 +14,20 @@
  *= require_self
  */
 @import "bulma";
+
+$secondary: #10639E;
+$secondary_dark: #2B506B;
+$tertiary: #D65036;
+$tertiary_dark: #9E1210;
+
+.is-secondary {
+  background-color: $secondary;
+  color: white;
+  border: none;
+}
+
+.is-tertiary {
+  background-color: $tertiary;
+  color: white;
+  border:none;
+}

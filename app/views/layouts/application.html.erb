@@ -11,7 +11,7 @@
 
   <body>
 
-    <header class="navbar is-primary">
+    <header class="navbar is-tertiary">
       <% if current_user %>
         <div class="navbar-end">
           <h2 class="navbar-item">Hi <%= current_user.username %>!</h2>
@@ -20,26 +20,28 @@
                    name="authenticity_token"
                    value="<%= form_authenticity_token %>">
             <input type="hidden" name="_method" value="delete">
-            <input class="button is-small" type="submit" value="Log out">
+            <input class="button is-small is-secondary" type="submit" value="Log out">
           </form>
         </div>
       <% else %>
         <div class="navbar-end">
           <form class="navbar-item" action="<%= new_user_url %>">
-            <input class="button is-small" type="submit" value="Register">
+            <input class="button is-small is-secondary" type="submit" value="Register">
           </form>
           <form class="navbar-item" action="<%= new_session_url %>">
-            <input class="button is-small" type="submit" value="Log in">
+            <input class="button is-small is-secondary" type="submit" value="Log in">
           </form>
         </div>
       <% end %>
+    </header>
 
       <% if !flash.empty? %>
         <% flash.each do |category, message| %>
-          <div class='category' <p><%= message %></p> </div>
+          <div class="has-text-centered has-text-<%=category%> has-background-<%=category%>-light">
+            <p><%= message %></p>
+          </div>
         <% end %>
       <% end %>
-    </header>
 
     <%= yield %>
   </body>

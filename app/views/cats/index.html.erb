@@ -1,6 +1,7 @@
-<h1> All cats </h1>
+<div class="container has-text-centered">
+  <h1 class="title is-1"> All cats </h1>
 
-<%= render 'cats' %>
+  <%= render 'cats' %>
 
-<h3 class="button"><%= link_to 'Rent a cat', new_cat_rental_request_url %></h3>
-<h3 class="button"><%= link_to 'Add a cat', new_cat_url %></h3>
+  <%= link_to 'Add a cat', new_cat_url, class: "button is-secondary" %>
+</div>

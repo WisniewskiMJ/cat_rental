@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_user
-    flash[:alert] = 'You have to be logged in to access that section'
+    flash[:danger] = 'You have to be logged in to access that section'
     redirect_to cats_url unless current_user
   end
 end

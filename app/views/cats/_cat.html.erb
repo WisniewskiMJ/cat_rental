@@ -1,4 +1,7 @@
-<li>
-  <%= cat.name %>
-  <%= link_to 'See more', cat_url(cat) %>
+<li class="column is-one-quarter">
+  <div class="box has-text-centered">
+      <h1 class="title is-2"><%= cat.name %></h1>
+      <%= link_to 'See more', cat_url(cat), class: "button is-small is-secondary" %>
+      <%= link_to 'Rent', new_cat_rental_request_url, class: "button is-small is-secondary" %>
+  </div>
 </li>
