@@ -1,6 +1,9 @@
-<h1>Request a cat</h1>
+<div class="container has-text-centered">
+  <div class="box has-text-centered mt-6">
+    <h1 class="title">Make a request</h1>
 
-<%= render 'form', cats: Cat.all %>
+    <%= render 'form', cats: Cat.all %>
 
-<br><br>
-<%= link_to 'Back to index', cats_url %>
+  </div>
+  <%= link_to 'Back to index', cats_url, class: "button is-secondary" %>
+</div>

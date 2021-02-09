@@ -37,9 +37,11 @@
 
       <% if !flash.empty? %>
         <% flash.each do |category, message| %>
-          <div class="has-text-centered has-text-<%=category%> has-background-<%=category%>-light">
-            <p><%= message %></p>
-          </div>
+          <% if !message.is_a?(Integer) %>
+            <div class="has-text-centered has-text-<%=category%> has-background-<%=category%>-light">
+              <p><%= message %></p>
+            </div>
+          <% end %>
         <% end %>
       <% end %>
 

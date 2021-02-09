@@ -31,3 +31,15 @@ $tertiary_dark: #9E1210;
   color: white;
   border:none;
 }
+
+.cover {
+  object-fit: cover;
+}
+
+.date {
+  width: inherit;
+}
+
+.half-width {
+  width: 50%;  
+}

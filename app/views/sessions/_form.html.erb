@@ -4,16 +4,17 @@
        name="authenticity_token"
        value="<%= form_authenticity_token %>">
 
-  <label for="username">Username</label>
-  <input type="text" name="user[username]">
+  <div class="field">
+    <label class="label" for="username">Username</label>
+    <input class="input half-width" type="text" name="user[username]">
+  </div>
 
-  <br>
+  <div class="field">
+    <label class="label" for="password">Password (min. 6 characters)</label>
+    <input class="input half-width" type="text" name="user[password]">
+  </div>
 
-  <label for="password">Password (min. 6 characters)</label>
-  <input type="text" name="user[password]">
 
-  <br>
-
-  <input type="submit" value="Log in">
+  <input class="button is-small is-secondary" type="submit" value="Log in">
 
 </form>
