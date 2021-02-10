@@ -1,7 +1,8 @@
-<h1>Edit cat</h1>
+<div class="container has-text-centered">
+  <div class="box has-text-centered mt-6">
+  <h1 class="title">Edit cat</h1>
 
-<%= render 'form', kitty: @cat, action: :edit%>
-
-<br>
-
-<%= link_to 'Back to cat', cat_url(@cat) %>
+  <%= render 'form', kitty: @cat, action: :edit%>
+  </div>
+  <%= link_to 'Back to cat', cat_url(@cat), class: "button is-secondary" %>
+</div>
