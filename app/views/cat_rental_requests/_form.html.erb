@@ -1,12 +1,10 @@
-<% if !flash.empty? %>
-  <% cat_id = flash[:cat_id] %>
-<% end %>
 <form action="<%= cat_rental_requests_url %>" method="post">
 
   <input type="hidden"
        name="authenticity_token"
        value="<%= form_authenticity_token %>">
 
+<% cat_id = params[:cat_id] %>
   <% if !cat_id %>
     <div class="field">
       <label class="label" for="cat_id">Select a cat</<label>

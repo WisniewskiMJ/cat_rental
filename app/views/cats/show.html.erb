@@ -53,13 +53,17 @@
           </div>
 
         </div>
-    
+
 
       <div class="level">
-        <form action="<%= new_cat_rental_request_url %>">
-          <% flash[:cat_id] = @cat.id %>
+        <% if current_user %>
+          <form action="<%= new_cat_rental_request_url %>">
+            <input type="hidden"
+                   name="cat_id"
+                   value="<%= @cat.id %>">
             <input class="button is-small is-secondary m-1" type="submit" value="Rent">
           </form>
+        <% end %>
 
           <% if current_user && current_user.id == @cat.owner.id %>
             <%= link_to 'Edit cat', edit_cat_url(@cat), class: "button is-small is-secondary m-1" %>
