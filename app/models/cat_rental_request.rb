@@ -18,20 +18,16 @@ class CatRentalRequest < ApplicationRecord
   belongs_to :requester,
              primary_key: :id,
              foreign_key: :user_id,
-             class_name: :User
+             class_name: :User,
+             inverse_of: :requests
 
   def approve!
-    if status != 'PENDING'
-      raise 'not pending'
-    else
-      transaction do
-        overlapping_pending_requests.each do |r|
-          r.status = 'DENIED'
-          r.save
-        end
-        self.status = 'APPROVED'
-        save
-      end
+    raise 'not pending' if status != 'PENDING'
+
+    transaction do
+      deny_overlapping_pending_requests
+      self.status = 'APPROVED'
+      save
     end
   end
 
@@ -61,5 +57,12 @@ class CatRentalRequest < ApplicationRecord
 
   def does_not_overlap
     errors[:overlaps] << 'with another request' if overlapping_approved_requests.exists?
+  end
+
+  def deny_overlapping_pending_requests
+    overlapping_pending_requests.each do |r|
+      r.status = 'DENIED'
+      r.save
+    end
   end
 end

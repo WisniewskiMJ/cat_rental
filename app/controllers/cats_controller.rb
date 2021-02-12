@@ -43,12 +43,12 @@ class CatsController < ApplicationController
 
   def update
     @cat = current_user.cats.find_by(id: params[:id])
-    if @cat
-      if @cat.update(cat_params)
-        redirect_to cat_url(@cat)
-      else
-        render :edit
-      end
+    return unless @cat
+
+    if @cat.update(cat_params)
+      redirect_to cat_url(@cat)
+    else
+      render :edit
     end
   end
 

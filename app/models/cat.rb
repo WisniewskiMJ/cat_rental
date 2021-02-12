@@ -9,7 +9,7 @@ class Cat < ApplicationRecord
 
   validates :birth_date, presence: true
   validates :color, presence: true, inclusion:
-    { in: COLORS, message: '%{value} is not a valid cat color' }
+    { in: COLORS, message: '%<value>s is not a valid cat color' }
   validates :name, presence: true
   validates :sex, presence: true, inclusion: { in: %w[M F] }
   validates :description, presence: true, length: { in: 3..300,
@@ -20,7 +20,8 @@ class Cat < ApplicationRecord
   belongs_to :owner,
              primary_key: :id,
              foreign_key: :user_id,
-             class_name: :User
+             class_name: :User,
+             inverse_of: :cats
 
   has_many :rental_requests,
            primary_key: :id,

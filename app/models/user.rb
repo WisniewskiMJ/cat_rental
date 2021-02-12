@@ -11,11 +11,13 @@ class User < ApplicationRecord
 
   has_many :cats,
            primary_key: :id,
-           class_name: :Cat
+           class_name: :Cat,
+           dependent: :destroy
 
   has_many :requests,
            primary_key: :id,
-           class_name: :CatRentalRequest
+           class_name: :CatRentalRequest,
+           dependent: :destroy
 
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)

@@ -2,9 +2,19 @@ require: rubocop-rails
 
 AllCops:
   Exclude:
+    - Gemfile
     - 'db/**/*'
     - 'config/**/*'
     - 'script/**/*'
     - 'bin/**/*'
     - 'test/**/*'
     - !ruby/regexp /old_and_unused\.rb$/
+
+Style/Documentation:
+    Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Naming/PredicateName:
+  Enabled: false
