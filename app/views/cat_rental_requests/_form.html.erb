@@ -1,40 +1,31 @@
-<form action="<%= cat_rental_requests_url %>" method="post">
-
-  <input type="hidden"
-       name="authenticity_token"
-       value="<%= form_authenticity_token %>">
+<%= form_with url: cat_rental_requests_url, method: :post do |form|%>
 
 <% cat_id = params[:cat_id] %>
+  
   <% if !cat_id %>
     <div class="field">
-      <label class="label" for="cat_id">Select a cat</<label>
+      <%= form.label 'cat_id', "Select a cat", class: 'label' %>
       <div class="control">
         <div class="select">
-          <select name="cat_rental_request[cat_id]">
-            <option disabled selected>- pick one -</option>
-            <% cats.each do |cat| %>
-            <option value="<%= cat.id %>"><%= cat.name %></option>
-            <% end %>
-          </select>
+          <%= form.collection_select 'cat_rental_request[cat_id]', cats, :id, :name, prompt: "-pick one-" %>
         </div>
       </div>
     </div>
-    <br>
   <% else %>
-    <h2 class="title is-2"> <%= cats.find(cat_id).name %> </h2>
-    <input type="hidden" name="cat_rental_request[cat_id]" value="<%= cat_id %>">
+    <%= tag.h2 cats.find(cat_id).name, class: 'title is-2' %>
+    <%= form.hidden_field 'cat_rental_request[cat_id]', value: cat_id %>
   <% end %>
 
   <div class="field">
-    <label class="label" for="start_date">Start date</label>
-    <input class="date input" type="date" name="cat_rental_request[start_date]"/>
+    <%= form.label 'start_date', "Start date", class: 'label' %>
+    <%= form.date_field 'cat_rental_request[start_date]', class: 'date input' %> 
   </div>
 
   <div class="field">
-    <label class="label" for="end_date">End date</label>
-    <input class="date input" type="date" name="cat_rental_request[end_date]">
+    <%= form.label 'end_date', "End date", class: 'label' %>
+    <%= form.date_field 'cat_rental_request[end_date]', class: 'date input' %> 
   </div>
 
-  <input class="button is-small is-secondary" type="submit" value="Send request">
+  <%= form.submit 'Send request', class: 'button is-small is-secondary' %> 
 
-</form>
+<% end %>
