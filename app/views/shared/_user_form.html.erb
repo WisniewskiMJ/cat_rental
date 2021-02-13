@@ -1,0 +1,17 @@
+<% action == :register ? action_url = users_url : session_url %>
+
+<%= form_with url: action_url, method: :post do |form| %>
+
+  <div class="field">
+    <%= form.label 'username', 'Username', class: 'label' %>
+    <%= form.text_field 'user[username]', class: 'input half-width' %>
+  </div>
+
+  <div class="field">
+    <%= form.label 'password', action == :register ? 'Password (min. 6 characters)' : 'Password', class: 'label' %>
+    <%= form.text_field 'user[password]', class: 'input half-width' %>
+  </div>
+
+  <%= form.submit action == :register ? 'Register' : 'Log in', class: 'button is-small is-secondary' %>
+
+<% end %>
