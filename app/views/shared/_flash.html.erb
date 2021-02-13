@@ -1,10 +1,9 @@
 <% if !flash.empty? %>
 	<div class="flash">
-    <% flash.each do |category, message| %>
-    	<div class="has-text-centered has-text-<% category %> 
-                	has-background-<% category %>-light">
-        <p><% message %></p>
-    	</div>
-  	<% end %>
+		<% flash.each do |category, message| %>
+			<div class="has-text-centered has-text-<%= category %> has-background-<%= category %>-light">
+				<p><%= message %></p>
+			</div>
+		<% end %>
 	</div>
 <% end %>
