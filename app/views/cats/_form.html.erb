@@ -6,59 +6,46 @@
   <% method = :post %>
 <% end %>
 
-<form action="<%= action_url %>" method="post">
+<%= form_with url: action_url, method: :post do |form| %>
 
-  <input type="hidden"
-         name="authenticity_token"
-         value="<%= form_authenticity_token %>">
-
-  <input type="hidden" name="_method" value="<%= method %>">
+  <%= form.hidden_field '_method', value: method %>
 
   <div class="field">
-    <label class="label" for="name">Name</label>
+    <%= form.label 'name', 'Name', class: 'label' %>
     <div class="control">
-      <input class="input half-width" type="text" name="cat[name]" value="<%= kitty.name %>">
+      <%= form.text_field 'cat[name]', value: kitty.name, class: 'input half-width' %>
     </div>
   </div>
 
   <div class="field">
-    <label class="label" for="birth_date">Birth date</label>
+    <%= form.label 'birth_date', 'Birth date', class: 'label' %>
     <div class="control">
-      <input class="date input" type="date" name="cat[birth_date]" value= "<%= kitty.birth_date %>">
+      <%= form.date_field 'cat[birth_date]', value: kitty.birth_date, class: 'date input' %>
     </div>
   </div>
 
   <div class="field">
-    <label class="label" for="color">Color</label>
+    <%= form.label 'color', 'Color', class: 'label' %>
     <div class="control">
       <div class="select">
-        <select name="cat[color]">
-          <option disabled <%= kitty.color ? "" : "selected" %>>- pick color -</option>
-            <% Cat::COLORS.each do |color| %>
-          <option value="<%= color %>" <%= kitty.color == color ? "selected" : "" %>>
-            <%= color.to_s.upcase %>
-          </option>
-            <% end %>
-        </select>
+        <%= form.select 'cat[color]', Cat::COLORS, prompt: '- pick color -', selected: kitty.color %>
       </div>
     </div>
   </div>
 
   <div class="field">
-    <label class="label" for="sex">Sex</label>
-    <label class="radio has-text-weight-semibold" class="label" for="M">M</label>
-    <input type="radio" name="cat[sex]" value="M" <%= kitty.sex == "M" ? "checked" : ""%>>
-    <label class="radio has-text-weight-semibold" for="F">F</label>
-    <input type="radio" name="cat[sex]" value="F" <%= kitty.sex == "F" ? "checked" : ""%>>
+    <%= form.label 'sex', 'Sex', class: 'label' %>
+    <%= form.label 'M', 'M', class: 'radio has-text-weight-semibold' %>
+    <%= form.radio_button 'cat[sex]', 'M', checked: kitty.sex == 'M'%>
+    <%= form.label 'F', 'F', class: 'radio has-text-weight-semibold' %>
+    <%= form.radio_button 'cat[sex]', 'F', checked: kitty.sex == 'F' %>
   </div>
 
   <div class="field">
     <label class="label" for="description">Description</label>
-    <textarea class="textarea half-width"name="cat[description]">
-      <%= kitty.description %>
-    </textarea>
+    <%= form.text_area 'cat[description]', value: kitty.description, class: 'textarea half-width' %>
   </div>
 
-  <input class="button is-small is-secondary" type="submit" value="<%= action == :edit ? "Update cat" : "Add cat" %>">
+  <%= form.submit action == :edit ? 'Update cat' : 'Add cat', class: 'button is-small is-secondary' %>
 
-</form>
+<% end %>
