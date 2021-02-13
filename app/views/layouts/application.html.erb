@@ -11,40 +11,12 @@
 
   <body>
 
-    <header class="navbar is-tertiary">
-      <% if current_user %>
-        <div class="navbar-end">
-          <h2 class="navbar-item">Hi <%= current_user.username %>!</h2>
-          <form class="navbar-item" action="<%= session_url %>" method="post">
-            <input type="hidden"
-                   name="authenticity_token"
-                   value="<%= form_authenticity_token %>">
-            <input type="hidden" name="_method" value="delete">
-            <input class="button is-small is-secondary" type="submit" value="Log out">
-          </form>
-        </div>
-      <% else %>
-        <div class="navbar-end">
-          <form class="navbar-item" action="<%= new_user_url %>">
-            <input class="button is-small is-secondary" type="submit" value="Register">
-          </form>
-          <form class="navbar-item" action="<%= new_session_url %>">
-            <input class="button is-small is-secondary" type="submit" value="Log in">
-          </form>
-        </div>
-      <% end %>
-    </header>
+    <%= render partial: 'shared/header' %>
 
-      <% if !flash.empty? %>
-        <% flash.each do |category, message| %>
-          <% if !message.is_a?(Integer) %>
-            <div class="has-text-centered has-text-<%=category%> has-background-<%=category%>-light">
-              <p><%= message %></p>
-            </div>
-          <% end %>
-        <% end %>
-      <% end %>
+    <%= render partial: 'shared/flash' %>
 
-    <%= yield %>
+    <%= tag.div yield, class: "container has-text-centered mt-6 mb-6" %>
+    
+
   </body>
 </html>

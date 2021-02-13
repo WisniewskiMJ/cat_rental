@@ -1,76 +1,76 @@
-<div class="container has-text-centered">
-  <div class="box has-text-centered mt-3">
-    <h1 class="title"><%= @cat.name %></h1>
+<div class="box has-text-centered mt-6">
+  <h1 class="title"><%= @cat.name %></h1>
 
-    <div class="block columns">
-      <div class="box column is-7">
-        <% cat_images = ["cat1", "cat2", "cat3", "cat4", "cat5", "cat6"] %>
-          <div class="image">
-            <%= image_tag("/images/#{cat_images.sample}.jpg", :alt => "cat", class: "cover" ) %>
-          </div>
+  <div class="block columns">
+    <div class="box column is-7">
+      <% cat_images = ["cat1", "cat2", "cat3", "cat4", "cat5", "cat6"] %>
+        <div class="image">
+          <%= image_tag("/images/#{cat_images.sample}.jpg", :alt => "cat", class: "cover") %>
         </div>
+      </div>
 
-        <div class="block column is-4 m-6">
-          <table class="table is-narrow">
-            <tr>
-              <td class="has-text-weight-bold">Age</td>
-              <td><%= @cat.age %></td>
-            </tr>
-            <tr>
-              <td class="has-text-weight-bold">Color</td>
-              <td><%= @cat.color %></td>
-            </tr>
-            <tr>
-              <td class="has-text-weight-bold">Sex</td>
-              <td><%= @cat.sex %></td>
-            </tr>
-            <tr>
-              <td class="has-text-weight-bold">Description</td>
-              <td><%= @cat.description %></td>
-            </tr>
-          </table>
+      <div class="block column is-4 m-6">
+        <table class="table is-narrow">
+          <tr>
+            <td class="has-text-weight-bold">Age</td>
+            <td><%= @cat.age %></td>
+          </tr>
+          <tr>
+            <td class="has-text-weight-bold">Color</td>
+            <td><%= @cat.color %></td>
+          </tr>
+          <tr>
+            <td class="has-text-weight-bold">Sex</td>
+            <td><%= @cat.sex %></td>
+          </tr>
+          <tr>
+            <td class="has-text-weight-bold">Description</td>
+            <td><%= @cat.description %></td>
+          </tr>
+        </table>
 
-          <div class="block pt-2"></div>
-          <% requests = @cat.rental_requests.order(:start_date) %>
-            <% if !requests.empty? %>
-              <h3 class="subtitle">Rental requests:</h3>
-              <ul>
-                <% requests.each do |request| %>
-                  <li>
-                    <%= "#{request.requester.username} - #{request.start_date} - #{request.end_date} status: #{request.status}" %>
-                    <% if request.status == 'PENDING' && current_user && current_user.id == @cat.owner.id %>
-                      <form action="<%= approve_cat_rental_request_url(id: request.id) %>" method="post">
-                        <input type="submit" value="Accept">
-                      </form>
-                      <form action="<%= deny_cat_rental_request_url(id: request.id) %>" method="post">
-                        <input type="submit" value="Reject">
-                      </form>
-                    <% end %>
-                  </li>
-                <% end %>
-              </ul>
-            <% end %>
-          </div>
-
-        </div>
-
-
-      <div class="level">
-        <% if current_user %>
-          <form action="<%= new_cat_rental_request_url %>">
-            <input type="hidden"
-                   name="cat_id"
-                   value="<%= @cat.id %>">
-            <input class="button is-small is-secondary m-1" type="submit" value="Rent">
-          </form>
-        <% end %>
-
-          <% if current_user && current_user.id == @cat.owner.id %>
-            <%= link_to 'Edit cat', edit_cat_url(@cat), class: "button is-small is-secondary m-1" %>
+        <div class="block pt-2"></div>
+        <% requests = @cat.rental_requests.order(:start_date) %>
+          <% if !requests.empty? %>
+            <h3 class="subtitle">Rental requests:</h3>
+            <ul>
+              <% requests.each do |request| %>
+                <li>
+                  <%= "#{request.requester.username} - #{request.start_date} - #{request.end_date} status: #{request.status}" %>
+                  <% if request.status == 'PENDING' && current_user && current_user.id == @cat.owner.id %>
+                    <form action="<%= approve_cat_rental_request_url(id: request.id) %>" method="post">
+                      <input type="submit" value="Accept">
+                    </form>
+                    <form action="<%= deny_cat_rental_request_url(id: request.id) %>" method="post">
+                      <input type="submit" value="Reject">
+                    </form>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
           <% end %>
         </div>
 
       </div>
 
-      <%= link_to 'Back to index', cats_url, class: "button is-secondary" %>
+
+    <div class="level">
+      <% if current_user %>
+        <form action="<%= new_cat_rental_request_url %>">
+          <input type="hidden"
+                  name="cat_id"
+                  value="<%= @cat.id %>">
+          <input class="button is-small is-secondary m-1" type="submit" value="Rent">
+        </form>
+      <% end %>
+
+        <% if current_user && current_user.id == @cat.owner.id %>
+          <%= link_to 'Edit cat', edit_cat_url(@cat), class: "button is-small is-secondary m-1" %>
+        <% end %>
+      </div>
+
     </div>
+
+    <%= link_to 'Back to index', cats_url, class: "button is-secondary" %>
+  </div>
+</div>

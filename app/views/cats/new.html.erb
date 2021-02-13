@@ -1,9 +1,5 @@
-<div class="container has-text-centered">
-  <div class="box has-text-centered mt-6">
-    <h1 class="title">Add a new cat</h1>
-
-    <%= render 'form', kitty: @cat, action: :new %>
-
-  </div>
-  <%= link_to 'Back to index', cats_url, class: "button is-secondary" %>
+<div class="box has-text-centered mt-6">
+  <h1 class="title">Add a new cat</h1>
+  <%= render 'form', kitty: @cat, action: :new %>
 </div>
+<%= link_to 'Back to index', cats_url, class: "button is-secondary" %>
