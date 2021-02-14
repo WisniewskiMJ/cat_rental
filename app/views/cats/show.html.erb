@@ -38,12 +38,12 @@
                 <li>
                   <%= "#{request.requester.username} - #{request.start_date} - #{request.end_date} status: #{request.status}" %>
                   <% if request.status == 'PENDING' && current_user && current_user.id == @cat.owner.id %>
-                    <form action="<%= approve_cat_rental_request_url(id: request.id) %>" method="post">
-                      <input type="submit" value="Accept">
-                    </form>
-                    <form action="<%= deny_cat_rental_request_url(id: request.id) %>" method="post">
-                      <input type="submit" value="Reject">
-                    </form>
+                    <%= form_with url: approve_cat_rental_request_url(id: request.id), method: :post do |form| %>
+                      <%= form.submit 'Accept' %>
+                    <% end %>
+                    <%= form_with url: deny_cat_rental_request_url(id: request.id), method: :post do |form| %>
+                      <%= form.submit 'Reject' %>
+                    <% end %>
                   <% end %>
                 </li>
               <% end %>
@@ -56,12 +56,7 @@
 
     <div class="level">
       <% if current_user %>
-        <form action="<%= new_cat_rental_request_url %>">
-          <input type="hidden"
-                  name="cat_id"
-                  value="<%= @cat.id %>">
-          <input class="button is-small is-secondary m-1" type="submit" value="Rent">
-        </form>
+        <%= link_to 'Rent', new_cat_rental_request_url(cat_id: @cat.id), class: "button is-small is-secondary m-1" %>
       <% end %>
 
         <% if current_user && current_user.id == @cat.owner.id %>

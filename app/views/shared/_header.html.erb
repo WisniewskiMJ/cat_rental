@@ -1,21 +1,18 @@
 <header class="navbar is-tertiary">
     <div class="navbar-end">
     <% if current_user %>
-        <h2 class="navbar-item">Hi <%= current_user.username %>!</h2>
-        <form class="navbar-item" action="<%= session_url %>" method="post">
-            <input type="hidden"
-                name="authenticity_token"
-                value="<%= form_authenticity_token %>">
-            <input type="hidden" name="_method" value="delete">
-            <input class="button is-small is-secondary" type="submit" value="Log out">
-        </form>
+      <h2 class="navbar-item">Hi <%= current_user.username %>!</h2>
+      <%= form_with url: session_url, method: :post, class: 'navbar-item' do |form| %>
+        <%= form.hidden_field '_method', value: :delete %>
+        <%= form.submit 'Log out', class: 'button is-small is-secondary' %>
+      <% end %>
     <% else %>
-        <form class="navbar-item" action="<%= new_user_url %>">
-            <input class="button is-small is-secondary" type="submit" value="Register">
-        </form>
-        <form class="navbar-item" action="<%= new_session_url %>">
-            <input class="button is-small is-secondary" type="submit" value="Log in">
-        </form>
-    <% end %>
+      <div class="navbar-item">
+        <%= link_to 'Register', new_user_url, class: 'button is-small is-secondary' %>
+      </div>
+      <div class="navbar-item">
+        <%= link_to 'Log in', new_session_url, class: 'button is-small is-secondary' %>
+      </div>
+  <% end %>
     </div>
 </header>
