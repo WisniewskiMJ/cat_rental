@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :require_no_user
+  before_action :require_no_user, except: (:show)
 
   def new
     render :new
@@ -16,6 +16,15 @@ class UsersController < ApplicationController
       render :new
     end
   end
+
+  def show
+    @user = User.find_by(id: params[:id])
+    if @user == current_user
+      render :show
+    else
+      redirect_to cats_url
+    end
+  end 
 
   private
 
