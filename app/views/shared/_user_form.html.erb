@@ -1,4 +1,4 @@
-<% action == :register ? action_url = users_url : session_url %>
+<% action == :register ? action_url = users_url : action_url = session_url %>
 
 <%= form_with url: action_url, method: :post do |form| %>
 
