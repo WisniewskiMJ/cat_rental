@@ -32,21 +32,7 @@
         <% requests = @cat.rental_requests.order(:start_date) %>
         <% if !requests.empty? %>
           <h3 class="subtitle">Rental requests:</h3>
-          <ul>
-            <% requests.each do |request| %>
-              <li>
-                <%= "#{request.requester.username} - #{request.start_date} - #{request.end_date} status: #{request.status}" %>
-                <% if request.status == 'PENDING' && current_user && current_user.id == @cat.owner.id %>
-                  <%= form_with url: approve_cat_rental_request_url(id: request.id), method: :post do |form| %>
-                    <%= form.submit 'Accept' %>
-                  <% end %>
-                  <%= form_with url: deny_cat_rental_request_url(id: request.id), method: :post do |form| %>
-                    <%= form.submit 'Reject' %>
-                  <% end %>
-                <% end %>
-              </li>
-            <% end %>
-          </ul>
+          <%= render 'shared/requests', requests: requests, page: :cat %> 
         <% end %>
       </div>
     </div>
