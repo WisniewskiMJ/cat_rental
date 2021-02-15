@@ -2,10 +2,12 @@
 
   <div class="block columns">
 
-    <div class="box column">
+    <div class="block column is-3">
+      <h1 class="title is-4">My cats:</h1>
+      <%= render 'shared/cats', cats: @user.cats, page: :user %>
     </div>
 
-    <div class="box column">
+    <div class="block column">
     </div>
 
   </div>
