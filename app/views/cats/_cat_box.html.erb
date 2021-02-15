@@ -3,7 +3,7 @@
       <h1 class="title is-3"><%= cat.name %></h1>
       <% cat_images = ["cat1", "cat2", "cat3", "cat4", "cat5", "cat6"] %>
       <figure class="image is-4by3 mb-3">
-        <%= image_tag("/images/#{cat_images.sample}.jpg", :alt => "cat", class: "cover" ) %>
+        <%= image_tag "/images/#{cat_images.sample}.jpg", :alt => "cat", class: "cover" %>
       </figure>
       <%= link_to 'See more', cat_url(cat), class: "button is-small is-secondary" %>
   </div>

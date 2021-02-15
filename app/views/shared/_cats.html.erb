@@ -1,0 +1,3 @@
+  <% cats.each do |cat| %>
+    <%= render page == :index ? 'cats/cat_box' : 'cats/cat_card', cat: cat %>
+  <% end %>

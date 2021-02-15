@@ -1,4 +1,6 @@
 <h1 class="title is-1"> All cats </h1>
-<%= render 'cats' %>
+<ul class="columns is-multiline">
+  <%= render 'shared/cats', cats: @cats, page: :index %>
+</ul>
 <%= link_to 'Add a cat', new_cat_url, class: "button is-secondary" %>
 <%= link_to 'Rent a cat', new_cat_rental_request_url, class: "button is-secondary" %>

@@ -1,0 +1,20 @@
+<div class="card p-0 mb-3">
+  <div class="card-content">
+    <div class="media">
+      <div class="media-left">
+        <figure class="image is-64x64">
+          <% cat_images = ["cat1", "cat2", "cat3", "cat4", "cat5", "cat6"] %>
+          <%= image_tag "/images/#{cat_images.sample}.jpg", :alt => "cat", class: "cover" %>
+        </figure>
+      </div>
+      <div class="media-content has-text-right">
+        <p class="title is-4"><%= cat.name %></p>
+        <p class="subtitle is-6">Requests: <%= cat.rental_requests.count %></p>
+
+      </div>
+    </div>
+    <div class="card-footer">
+      <%= link_to 'See more', cat_url(cat), class: "card-footer-item button is-small is-secondary" %>
+    </div>
+  </div>
+</div>
