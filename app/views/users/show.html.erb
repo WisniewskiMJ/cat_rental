@@ -1,5 +1,4 @@
-<div class="box has-text-centered mt-6">
-  <h1 class="title"><%= @user.username %></h1>
+<%= render layout: 'shared/boxed', locals: {title: @user.username} do %>
 
   <div class="block columns">
 
@@ -13,5 +12,5 @@
 
   <div class="level">
   </div>
-</div>
-<%= link_to 'Back to index', cats_url, class: "button is-secondary" %>
+
+<% end %>

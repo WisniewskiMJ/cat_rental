@@ -1,5 +1,3 @@
-<div class="box has-text-centered mt-6">
-  <h1 class="title">Add a new cat</h1>
+<%= render layout: 'shared/boxed', locals: {title: 'Add a new cat'} do %>
   <%= render 'form', kitty: @cat, action: :new %>
-</div>
-<%= link_to 'Back to index', cats_url, class: "button is-secondary" %>
+<% end %>

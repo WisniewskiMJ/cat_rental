@@ -28,7 +28,8 @@
     <%= form.label 'color', 'Color', class: 'label' %>
     <div class="control">
       <div class="select">
-        <%= form.select 'cat[color]', Cat::COLORS, prompt: '- pick color -', selected: kitty.color %>
+        <% colors = Cat::COLORS.map { |color| color.upcase } %>
+        <%= form.select 'cat[color]', colors, prompt: '- pick color -', selected: kitty.color %>
       </div>
     </div>
   </div>

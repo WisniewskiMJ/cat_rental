@@ -1,6 +1,4 @@
-<div class="box has-text-centered mt-6">
-   
-  <h1 class="title"><%= @cat.name %></h1>
+<%= render layout: 'shared/boxed', locals: {title: @cat.name} do %>
 
   <div class="block columns">
     <div class="box column is-7">
@@ -64,6 +62,5 @@
         <%= link_to 'Edit cat', edit_cat_url(@cat), class: "button is-small is-secondary m-1" %>
       <% end %>
   </div>
-</div>
-<%= link_to 'Back to index', cats_url, class: "button is-secondary" %>
+<% end %>
  

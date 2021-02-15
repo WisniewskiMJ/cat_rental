@@ -1,7 +1,3 @@
-<div class="box has-text-centered mt-6">
-  <h1 class="title">Make a request</h1>
-
+<%= render layout: 'shared/boxed', locals: {title: 'Make a request'} do %>
   <%= render 'form', cats: Cat.all %>
-
-</div>
-<%= link_to 'Back to index', cats_url, class: "button is-secondary" %>
+<% end %>

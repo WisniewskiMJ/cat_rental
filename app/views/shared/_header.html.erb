@@ -1,7 +1,7 @@
 <header class="navbar is-tertiary">
     <div class="navbar-end">
     <% if current_user %>
-      <h2 class="navbar-item">Hi <%= current_user.username %>!</h2>
+      <h2 class="navbar-item has-text-white">Hi <%= current_user.username %>!</h2>
       <div class="navbar-item">
         <%= link_to 'My account', user_url(current_user), class: 'button is-small is-secondary' %>
       </div>
