@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :require_no_user, except: (:show)
+  before_action :require_no_user, except: :show
 
   def new
     render :new
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     else
       redirect_to cats_url
     end
-  end 
+  end
 
   private
 

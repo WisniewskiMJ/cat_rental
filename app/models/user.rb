@@ -19,7 +19,7 @@ class User < ApplicationRecord
            class_name: :CatRentalRequest,
            dependent: :destroy
 
-  def self.find_by_credentials(username, password)
+  def self.confirm_credentials(username, password)
     user = User.find_by(username: username)
     return user if user&.is_password?(password)
 
