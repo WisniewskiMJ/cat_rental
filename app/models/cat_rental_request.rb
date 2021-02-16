@@ -9,6 +9,7 @@ class CatRentalRequest < ApplicationRecord
   validates :end_date, presence: true
   validates :status, presence: true, inclusion: { in: STATUSES }
   validate :not_backwards_in_time
+  validate :not_in_the_past
   validate :does_not_overlap
 
   belongs_to :cat,
@@ -38,6 +39,10 @@ class CatRentalRequest < ApplicationRecord
 
   def not_backwards_in_time
     errors[:end_date] << "can't be earlier than start date" if start_date > end_date
+  end
+
+  def not_in_the_past
+    errors[:start_date] << "must minimum one day from now" if start_date < Time.now.to_date
   end
 
   def overlapping_requests
