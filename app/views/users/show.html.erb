@@ -16,6 +16,8 @@
   </div>
 
   <div class="level">
+    <%= link_to 'Edit account', edit_user_url(@user), class: 'button is-small is-secondary' %>
+    <%= link_to 'Delete account', user_url(@user), method: :delete, class: 'button is-small is-secondary' %>
   </div>
 
 <% end %>

@@ -1,17 +1,26 @@
-<% action == :register ? action_url = users_url : action_url = session_url %>
+<% case action %>
+  <% when :register %>
+    <% action_url, method, submit, password_label = [users_url, :post, 'Register', 'Password (min. 6 characters)'] %>
+  <% when :login %>
+    <% action_url, method, submit, password_label = [session_url, :post, 'Log in', 'Password'] %>
+  <% when :edit %>
+    <% action_url, method, submit, password_label = [user_url, :patch, 'Submit', 'New password'] %>
+<% end %>
 
 <%= form_with url: action_url, method: :post do |form| %>
 
+  <%= form.hidden_field '_method', value: method %>
+
   <div class="field">
     <%= form.label 'username', 'Username', class: 'label' %>
-    <%= form.text_field 'user[username]', class: 'input half-width' %>
+    <%= form.text_field 'user[username]', value: action == :edit ? user.username : '', class: 'input half-width' %>
   </div>
 
   <div class="field">
-    <%= form.label 'password', action == :register ? 'Password (min. 6 characters)' : 'Password', class: 'label' %>
+    <%= form.label 'password', password_label, class: 'label' %>
     <%= form.text_field 'user[password]', class: 'input half-width' %>
   </div>
 
-  <%= form.submit action == :register ? 'Register' : 'Log in', class: 'button is-small is-secondary' %>
+  <%= form.submit submit, class: 'button is-small is-secondary' %>
 
 <% end %>
