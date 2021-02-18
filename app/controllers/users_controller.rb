@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :require_no_user, only: [:new, :create]
-  before_action :require_user, except: [:new, :create]
+  before_action :require_no_user, only: %i[new create]
+  before_action :require_user, except: %i[new create]
 
   def new
     render :new
@@ -12,6 +12,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       login(@user)
+      email = UserMailer.welcome_email(@user)
+      email.deliver
       redirect_to cats_url
     else
       render :new
@@ -27,11 +29,11 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit 
+  def edit
     @user = current_user
     if @user
-      render :edit 
-    else 
+      render :edit
+    else
       redirect to cats_url
     end
   end
@@ -49,12 +51,8 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find_by(id: params[:id])
-    if @user == current_user
-      @user.destroy
-      redirect_to cats_url
-    else
-      redirect_to cats_url
-    end
+    @user.destroy if @user == current_user
+    redirect_to cats_url
   end
 
   private

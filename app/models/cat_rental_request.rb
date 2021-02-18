@@ -42,7 +42,7 @@ class CatRentalRequest < ApplicationRecord
   end
 
   def not_in_the_past
-    errors[:start_date] << "must minimum one day from now" if start_date < Time.now.to_date
+    errors[:start_date] << 'must minimum one day from now' if start_date < Time.zone.now.to_date
   end
 
   def overlapping_requests
