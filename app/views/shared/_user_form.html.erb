@@ -16,10 +16,12 @@
     <%= form.text_field 'user[username]', value: action == :edit ? user.username : '', class: 'input half-width' %>
   </div>
 
-  <div class="field">
-    <%= form.label 'email', 'Email address', class: 'label' %>
-    <%= form.email_field 'user[email]', value: action == :edit ? user.email : '', class: 'input half-width' %>
-  </div>
+  <% unless action == :login %>
+    <div class="field">
+      <%= form.label 'email', 'Email address', class: 'label' %>
+      <%= form.email_field 'user[email]', value: action == :edit ? user.email : '', class: 'input half-width' %>
+    </div>
+  <% end %>
 
 
   <div class="field">
