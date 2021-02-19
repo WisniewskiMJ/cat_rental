@@ -26,6 +26,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bulma-rails', '~> 0.9.1'
+gem 'email_validator', '~> 2.2', '>= 2.2.2', require: 'email_validator/strict'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

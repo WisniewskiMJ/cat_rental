@@ -17,8 +17,14 @@
   </div>
 
   <div class="field">
+    <%= form.label 'email', 'Email address', class: 'label' %>
+    <%= form.email_field 'user[email]', value: action == :edit ? user.email : '', class: 'input half-width' %>
+  </div>
+
+
+  <div class="field">
     <%= form.label 'password', password_label, class: 'label' %>
-    <%= form.text_field 'user[password]', class: 'input half-width' %>
+    <%= form.password_field 'user[password]', class: 'input half-width' %>
   </div>
 
   <%= form.submit submit, class: 'button is-small is-secondary' %>
