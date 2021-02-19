@@ -11,16 +11,6 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def login(user)
-    user.reset_session_token
-    session[:session_token] = user.session_token
-  end
-
-  def logout
-    current_user&.reset_session_token
-    session[:session_token] = nil
-  end
-
   def require_no_user
     redirect_to cats_url if current_user
   end
@@ -31,4 +21,5 @@ class ApplicationController < ActionController::Base
     flash[:danger] = 'You have to be logged in to access that section'
     redirect_to cats_url
   end
+
 end
