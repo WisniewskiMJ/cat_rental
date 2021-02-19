@@ -4,7 +4,6 @@ class SessionsController < ApplicationController
   before_action :require_no_user, except: [:destroy]
 
   def new
-    render :new
   end
 
   def create

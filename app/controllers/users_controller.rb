@@ -5,7 +5,6 @@ class UsersController < ApplicationController
   before_action :require_user, except: %i[new create]
 
   def new
-    render :new
   end
 
   def create

@@ -5,7 +5,6 @@ class CatsController < ApplicationController
 
   def index
     @cats = Cat.all
-    render :index
   end
 
   def show
@@ -20,7 +19,6 @@ class CatsController < ApplicationController
 
   def new
     @cat = Cat.new
-    render :new
   end
 
   def create

@@ -5,7 +5,6 @@ class CatRentalRequestsController < ApplicationController
   before_action :require_ownership, only: %i[approve deny]
 
   def new
-    render :new
   end
 
   def create
