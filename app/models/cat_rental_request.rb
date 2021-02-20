@@ -12,12 +12,9 @@ class CatRentalRequest < ApplicationRecord
   validate :not_in_the_past
   validate :does_not_overlap
 
-  belongs_to :cat,
-             primary_key: :id,
-             class_name: :Cat
+  belongs_to :cat
 
   belongs_to :requester,
-             primary_key: :id,
              foreign_key: :user_id,
              class_name: :User,
              inverse_of: :requests

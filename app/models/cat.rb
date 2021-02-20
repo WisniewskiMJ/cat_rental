@@ -18,13 +18,12 @@ class Cat < ApplicationRecord
   validates :owner, presence: true
 
   belongs_to :owner,
-             primary_key: :id,
              foreign_key: :user_id,
              class_name: :User,
              inverse_of: :cats
 
   has_many :rental_requests,
-           primary_key: :id,
+           foreign_key: :cat_id,
            class_name: :CatRentalRequest,
            dependent: :destroy
 

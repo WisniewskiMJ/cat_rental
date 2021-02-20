@@ -11,12 +11,10 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, email: { mode: :strict }
 
   has_many :cats,
-           primary_key: :id,
-           class_name: :Cat,
            dependent: :destroy
 
   has_many :requests,
-           primary_key: :id,
+           foreign_key: :user_id,
            class_name: :CatRentalRequest,
            dependent: :destroy
 

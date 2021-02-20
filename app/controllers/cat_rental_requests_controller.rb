@@ -5,6 +5,7 @@ class CatRentalRequestsController < ApplicationController
   before_action :require_ownership, only: %i[approve deny]
 
   def new
+    @cats = Cat.all
   end
 
   def create
