@@ -1,24 +1,16 @@
-# README
+# Ninety Nine Cats
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Website based on App Academy Open course project, with some add ons.
 
-Things you may want to cover:
+### Technologies:
 
-* Ruby version
+-Ruby v2.7.2,
+-Rails v5.2.4,
+-Bulma CSS framework
 
-* System dependencies
+### Setup
 
-* Configuration
+To run locally, you have to have Ruby in version 2.7.2  installed on your machine.
+Next you have to execute .bin/setup, which is script that will install bundler,
+create and seed database. Then you have to run bundle exec rails server, and the app will be available at localhost:3000
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
