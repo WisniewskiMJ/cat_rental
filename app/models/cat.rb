@@ -23,11 +23,8 @@ class Cat < ApplicationRecord
              inverse_of: :cats
 
   has_many :rental_requests,
-           foreign_key: :cat_id,
            class_name: :CatRentalRequest,
            dependent: :destroy
 
-  def age
-    time_ago_in_words(birth_date)
-  end
+
 end

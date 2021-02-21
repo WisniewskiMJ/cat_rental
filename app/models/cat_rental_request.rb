@@ -11,9 +11,9 @@ class CatRentalRequest < ApplicationRecord
   validates :start_date, presence: true
   validates :end_date, presence: true
   validates :status, presence: true
-  validate :not_backwards_in_time
+  validate :end_not_earlier_than_start
   validate :not_in_the_past
-  validate :does_not_overlap
+  validate :does_not_overlap_with_approved
 
   belongs_to :cat
 
@@ -37,12 +37,12 @@ class CatRentalRequest < ApplicationRecord
     save
   end
 
-  def not_backwards_in_time
-    errors[:end_date] << "can't be earlier than start date" if start_date > end_date
+  def end_not_earlier_than_start
+    errors[:end_date] << "can not be earlier than start" if start_date > end_date
   end
 
   def not_in_the_past
-    errors[:start_date] << 'must minimum one day from now' if start_date < Time.zone.now.to_date
+    errors[:start_date] << 'can not be in the past' if start_date < Time.zone.now.to_date
   end
 
   def overlapping_requests
@@ -60,8 +60,8 @@ class CatRentalRequest < ApplicationRecord
     overlapping_requests.where('status = ?', 10)
   end
 
-  def does_not_overlap
-    errors[:overlaps] << 'with another request' if overlapping_approved_requests.exists?
+  def does_not_overlap_with_approved
+    errors[:overlaps] << 'with approved request' if overlapping_approved_requests.exists?
   end
 
   def deny_overlapping_pending_requests
