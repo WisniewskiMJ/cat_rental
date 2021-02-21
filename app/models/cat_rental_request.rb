@@ -1,13 +1,16 @@
 # frozen_string_literal: true
 
 class CatRentalRequest < ApplicationRecord
-  STATUSES = %w[PENDING APPROVED DENIED].freeze
+  enum status: {pending: 10,
+                 approved: 20,
+                 denied: 30
+                }
 
   validates :cat_id, presence: true
   validates :user_id, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true
-  validates :status, presence: true, inclusion: { in: STATUSES }
+  validates :status, presence: true
   validate :not_backwards_in_time
   validate :not_in_the_past
   validate :does_not_overlap
@@ -20,17 +23,17 @@ class CatRentalRequest < ApplicationRecord
              inverse_of: :requests
 
   def approve!
-    raise 'not pending' if status != 'PENDING'
+    raise 'not pending' if status != 'pending'
 
     transaction do
       deny_overlapping_pending_requests
-      self.status = 'APPROVED'
+      self.status = :approved
       save
     end
   end
 
   def deny!
-    self.status = 'DENIED'
+    self.status = :denied
     save
   end
 
@@ -50,11 +53,11 @@ class CatRentalRequest < ApplicationRecord
   end
 
   def overlapping_approved_requests
-    overlapping_requests.where('status = ?', 'APPROVED')
+    overlapping_requests.where('status = ?', 20)
   end
 
   def overlapping_pending_requests
-    overlapping_requests.where('status = ?', 'PENDING')
+    overlapping_requests.where('status = ?', 10)
   end
 
   def does_not_overlap
@@ -63,7 +66,7 @@ class CatRentalRequest < ApplicationRecord
 
   def deny_overlapping_pending_requests
     overlapping_pending_requests.each do |r|
-      r.status = 'DENIED'
+      r.status = :denied
       r.save
     end
   end
