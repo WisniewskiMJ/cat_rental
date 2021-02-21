@@ -1,8 +1,6 @@
 <%= form_with url: cat_rental_requests_url, method: :post do |form|%>
-
-<% cat_id = params[:cat_id] %>
   
-  <% if !cat_id %>
+  <% if !@cat %>
     <div class="field">
       <%= form.label 'cat_id', "Select a cat", class: 'label' %>
       <div class="control">
@@ -12,8 +10,8 @@
       </div>
     </div>
   <% else %>
-    <%= tag.h2 cats.find(cat_id).name, class: 'title is-2' %>
-    <%= form.hidden_field 'cat_rental_request[cat_id]', value: cat_id %>
+    <%= tag.h2 cats.find(@cat.id).name, class: 'title is-2' %>
+    <%= form.hidden_field 'cat_rental_request[cat_id]', value: @cat.id %>
   <% end %>
 
   <div class="field">

@@ -6,6 +6,7 @@ class CatRentalRequestsController < ApplicationController
 
   def new
     @cats = Cat.all
+    @cat = Cat.find_by(params[:cat_id])
   end
 
   def create
