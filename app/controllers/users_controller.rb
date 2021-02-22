@@ -13,8 +13,10 @@ class UsersController < ApplicationController
       login(@user)
       email = UserMailer.welcome_email(@user)
       email.deliver
+      flash[:success] = 'Your account has been created'
       redirect_to cats_url
     else
+      flash.now[:danger] = @user.errors.full_messages.to_sentence
       render :new
     end
   end

@@ -6,15 +6,17 @@ class CatRentalRequestsController < ApplicationController
 
   def new
     @cats = Cat.all
-    @cat = Cat.find_by(params[:cat_id])
+    @cat = Cat.find_by(id: (params[:cat_id]))
   end
 
   def create
     @request = current_user.requests.new(cat_rental_request_params)
     if @request.save
+      flash[:success] = 'Your request has been submitted'
       redirect_to cat_url(@request[:cat_id])
     else
-      render :new
+      flash[:danger] = @request.errors.full_messages.to_sentence
+      redirect_to new_cat_rental_request_url(cat_id: (@request[:cat_id]))
     end
   end
 

@@ -7,9 +7,10 @@
     <% action_url, method, submit, password_label = [user_url, :patch, 'Submit', 'New password'] %>
 <% end %>
 
-<%= form_with url: action_url, method: :post do |form| %>
+<%= form_with url: action_url, method: :post, local: true do |form| %>
 
   <%= form.hidden_field '_method', value: method %>
+  <%= form.hidden_field 'authenticity_token', value: form_authenticity_token %>
 
   <div class="field">
     <%= form.label 'username', 'Username', class: 'label' %>

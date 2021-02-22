@@ -11,14 +11,17 @@ class SessionsController < ApplicationController
                                      params[:user][:password])
     if @user
       login(@user)
+      flash[:success] = 'You have been logged in'
       redirect_to cats_url
     else
+      flash.now[:danger] = "Username and password doesn't match"
       render :new
     end
   end
 
   def destroy
     logout
+    flash[:success] = 'You have been logged out'
     redirect_to cats_url
   end
 

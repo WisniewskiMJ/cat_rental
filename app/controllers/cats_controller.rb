@@ -24,8 +24,10 @@ class CatsController < ApplicationController
   def create
     @cat = current_user.cats.new(cat_params)
     if @cat.save
+      flash[:success] = 'You have succesfully added a new cat'
       redirect_to cat_url(@cat)
     else
+      flash.now[:danger] = @cat.errors.full_messages.to_sentence
       render :new
     end
   end
@@ -42,10 +44,12 @@ class CatsController < ApplicationController
   def update
     @cat = current_user.cats.find_by(id: params[:id])
     return unless @cat
-
+  
     if @cat.update(cat_params)
+      flash[:success] = 'Your cat has been succesfully updated'
       redirect_to cat_url(@cat)
     else
+      flash.now[:danger] = @cat.errors.full_messages.to_sentence
       render :edit
     end
   end
