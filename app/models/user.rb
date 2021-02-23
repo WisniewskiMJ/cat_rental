@@ -14,7 +14,6 @@ class User < ApplicationRecord
            dependent: :destroy
 
   has_many :requests,
-           foreign_key: :user_id,
            class_name: :CatRentalRequest,
            dependent: :destroy
 

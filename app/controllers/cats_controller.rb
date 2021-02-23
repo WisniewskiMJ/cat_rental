@@ -44,7 +44,7 @@ class CatsController < ApplicationController
   def update
     @cat = current_user.cats.find_by(id: params[:id])
     return unless @cat
-  
+
     if @cat.update(cat_params)
       flash[:success] = 'Your cat has been succesfully updated'
       redirect_to cat_url(@cat)

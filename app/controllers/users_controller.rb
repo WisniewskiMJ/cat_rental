@@ -4,8 +4,7 @@ class UsersController < ApplicationController
   before_action :require_no_user, only: %i[new create]
   before_action :require_user, except: %i[new create]
 
-  def new
-  end
+  def new; end
 
   def create
     @user = User.new(user_params)

@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 class CatRentalRequest < ApplicationRecord
-  enum status: {pending: 10,
+  enum status: { pending: 10,
                  approved: 20,
-                 denied: 30
-                }
+                 denied: 30 }
 
   validates :cat_id, presence: true
   validates :user_id, presence: true
@@ -38,7 +37,7 @@ class CatRentalRequest < ApplicationRecord
   end
 
   def end_not_earlier_than_start
-    errors[:end_date] << "can not be earlier than start" if start_date > end_date
+    errors[:end_date] << 'can not be earlier than start' if start_date > end_date
   end
 
   def not_in_the_past

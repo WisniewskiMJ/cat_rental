@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Cat < ApplicationRecord
-
   COLORS = %w[black grey white buff brown orange tortoiseshell calico].freeze
 
   validates :birth_date, presence: true
@@ -20,5 +19,4 @@ class Cat < ApplicationRecord
   has_many :rental_requests,
            class_name: :CatRentalRequest,
            dependent: :destroy
-
 end
