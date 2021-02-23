@@ -19,6 +19,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'rubocop-rails', require: false
   gem 'faker', '~> 2.16'
+  gem 'spring'
 end
 
 group :development do
@@ -28,14 +29,20 @@ group :development do
   gem 'binding_of_caller'
   gem 'pry-rails'
   gem 'letter_opener'
-  gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring-commands-rspec'
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'rails-controller-testing'
+  gem 'guard-rspec'
 end
 
 group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
+  gem 'launchy'
+  gem 'shoulda-matchers', '~> 4.0'
 end
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
