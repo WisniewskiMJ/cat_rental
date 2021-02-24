@@ -24,20 +24,16 @@ class User < ApplicationRecord
     nil
   end
 
-  def self.generate_session_token
+  private_class_method def self.generate_session_token
     SecureRandom.urlsafe_base64
   end
 
-  def ensure_session_token
-    self.session_token ||= User.generate_session_token
-  end
-
   def reset_session_token
-    self.session_token = User.generate_session_token
+    self.session_token = User.send(:generate_session_token)
     save
-    self.session_token
+    session_token
   end
-
+  
   def password=(password)
     @password = password
     self.password_digest = BCrypt::Password.create(password)
@@ -46,4 +42,11 @@ class User < ApplicationRecord
   def is_password?(password)
     BCrypt::Password.new(password_digest).is_password?(password)
   end
+
+  private
+
+  def ensure_session_token
+    self.session_token ||= User.send(:generate_session_token)
+  end
+
 end

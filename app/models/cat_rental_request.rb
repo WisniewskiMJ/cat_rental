@@ -40,22 +40,22 @@ class CatRentalRequest < ApplicationRecord
 
   def end_not_earlier_than_start
     return if start_date.nil? || end_date.nil?
+
     errors[:end_date] << 'can not be earlier than start' if start_date > end_date
   end
 
   def not_in_the_past
     return if start_date.nil?
+
     errors[:start_date] << 'can not be in the past' if start_date < Time.zone.now.to_date
   end
 
   def overlapping_requests
-    CatRentalRequest.where(cat_id: self.cat_id)
-                    .where.not(id: self.id)
-                    .where.not('(start_date < ? AND end_date < ?) 
+    CatRentalRequest.where(cat_id: cat_id)
+                    .where.not(id: id)
+                    .where.not('(start_date < ? AND end_date < ?)
                                 OR (start_date > ? AND end_date > ?)',
-                                
-                                start_date, start_date, end_date, end_date
-                              )
+                               start_date, start_date, end_date, end_date)
   end
 
   def overlapping_approved_requests
