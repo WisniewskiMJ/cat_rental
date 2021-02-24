@@ -22,7 +22,7 @@ class CatRentalRequest < ApplicationRecord
              inverse_of: :requests
 
   def approve!
-    raise 'not pending' if status != 'pending'
+    raise 'status is not pending' if status != 'pending'
 
     transaction do
       deny_overlapping_pending_requests
@@ -36,27 +36,34 @@ class CatRentalRequest < ApplicationRecord
     save
   end
 
+  private
+
   def end_not_earlier_than_start
+    return if start_date.nil? || end_date.nil?
     errors[:end_date] << 'can not be earlier than start' if start_date > end_date
   end
 
   def not_in_the_past
+    return if start_date.nil?
     errors[:start_date] << 'can not be in the past' if start_date < Time.zone.now.to_date
   end
 
   def overlapping_requests
-    CatRentalRequest.where('cat_id = ?', cat_id)
-                    .where.not('id = ?', id)
-                    .where.not('start_date > ? OR end_date < ?',
-                               end_date, start_date)
+    CatRentalRequest.where(cat_id: self.cat_id)
+                    .where.not(id: self.id)
+                    .where.not('(start_date < ? AND end_date < ?) 
+                                OR (start_date > ? AND end_date > ?)',
+                                
+                                start_date, start_date, end_date, end_date
+                              )
   end
 
   def overlapping_approved_requests
-    overlapping_requests.where('status = ?', 20)
+    overlapping_requests.where(status: :approved)
   end
 
   def overlapping_pending_requests
-    overlapping_requests.where('status = ?', 10)
+    overlapping_requests.where(status: 10)
   end
 
   def does_not_overlap_with_approved
