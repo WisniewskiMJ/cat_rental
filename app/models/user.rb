@@ -19,7 +19,7 @@ class User < ApplicationRecord
 
   def self.confirm_credentials(username, password)
     user = User.find_by(username: username)
-    return user if user&.is_password?(password)
+    return user if user && user.send(:is_password?, password)
 
     nil
   end
@@ -39,14 +39,14 @@ class User < ApplicationRecord
     self.password_digest = BCrypt::Password.create(password)
   end
 
-  def is_password?(password)
-    BCrypt::Password.new(password_digest).is_password?(password)
-  end
-
   private
 
   def ensure_session_token
     self.session_token ||= User.send(:generate_session_token)
+  end
+
+  def is_password?(password)
+    BCrypt::Password.new(password_digest).is_password?(password)
   end
 
 end

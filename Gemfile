@@ -43,6 +43,7 @@ group :test do
   gem 'chromedriver-helper'
   gem 'launchy'
   gem 'shoulda-matchers', '~> 4.0'
+  gem 'rails-controller-testing'
 end
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

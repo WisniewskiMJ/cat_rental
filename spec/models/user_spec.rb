@@ -60,9 +60,15 @@ RSpec.describe User, type: :model do
         token_after_reset = user.session_token
         expect(token_before_reset).not_to eq(token_after_reset)
       end
-      
     end
-    
+
+    describe '#password=' do
+      it 'sets password_digest' do
+        user.password_digest = nil
+        user.password = 'password'
+        expect(user.password_digest).not_to be_nil
+      end
+    end
     
   end
   

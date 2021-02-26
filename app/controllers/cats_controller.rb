@@ -60,8 +60,4 @@ class CatsController < ApplicationController
     params.require(:cat).permit(:name, :birth_date, :color, :sex, :description)
   end
 
-  def require_owner
-    require_user
-    flash.now[:alert] = 'You have to be owner to edit a cat'
-  end
 end
