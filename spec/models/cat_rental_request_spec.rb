@@ -14,8 +14,9 @@ RSpec.describe CatRentalRequest, type: :model do
     it { is_expected.to validate_presence_of(:status) }
 
     it 'validates end_date not earlier than start_date' do
-      request.start_date = Date.today.next_week
+      request.start_date = Date.tomorrow.next_week
       request.end_date = Date.tomorrow
+      puts request.attributes
       request.valid?
       expect(request.errors[:end_date]).to eq(['can not be earlier than start'])
     end

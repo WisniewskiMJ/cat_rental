@@ -35,24 +35,12 @@ RSpec.describe CatsController, type: :controller do
   end
 
   describe 'GET #new' do
-    context 'user is logged in' do
-      it 'renders new cat form page' do
-        get :new
-        expect(response).to render_template(:new)
-        expect(response).to be_successful
-      end
-    end
-    context 'no user is logged in' do
-      it 'redirects to index page' do
-        user.reset_session_token
-        get :new
-        expect(response).to redirect_to(cats_url)
-      end
-      it 'displays not logged in message' do
-        user.reset_session_token
-        get :new
-        expect(flash[:danger]).to eq('You have to be logged in to access that section')
-      end
+    let(:call_action) { get :new }
+    it_behaves_like 'an action requiring logged in user'    
+    it 'renders new cat form page' do
+      get :new
+      expect(response).to render_template(:new)
+      expect(response).to be_successful
     end
   end
 
