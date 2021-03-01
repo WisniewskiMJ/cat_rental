@@ -54,7 +54,7 @@ RSpec.describe CatsController, type: :controller do
       it 'shows success message' do
         expect(flash[:success]).to eq('You have succesfully added a new cat')
       end
-      it 'renders the show page of new cat'do
+      it 'redirects to show page of new cat'do
         expect(response).to redirect_to(cat_url(Cat.find_by(name: 'Valid_cat')))
       end
     end

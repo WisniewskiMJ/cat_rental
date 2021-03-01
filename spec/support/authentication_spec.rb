@@ -11,14 +11,12 @@ shared_examples_for 'an action requiring logged in user' do
     end
   end
 
-  context 'when no user is logged in' do
+  context 'no user is logged in' do
     before do
       user.reset_session_token
       call_action
     end
-    it 'redirects to index page' do
-      expect(response).to redirect_to(cats_url)
-    end
+ 
     it 'displays not logged in message' do
       expect(flash[:danger]).to eq('You have to be logged in to access that section')
     end

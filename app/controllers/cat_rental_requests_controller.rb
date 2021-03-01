@@ -12,9 +12,11 @@ class CatRentalRequestsController < ApplicationController
   def create
     @request = current_user.requests.new(cat_rental_request_params)
     if @request.save
+      puts 'SAVE'
       flash[:success] = 'Your request has been submitted'
       redirect_to cat_url(@request[:cat_id])
     else
+      puts 'NO SAVE'
       flash[:danger] = @request.errors.full_messages.to_sentence
       redirect_to new_cat_rental_request_url(cat_id: (@request[:cat_id]))
     end
