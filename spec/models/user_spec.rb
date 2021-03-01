@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-
   subject(:user) { FactoryBot.build(:user) }
 
   describe 'before validation' do
@@ -23,33 +22,29 @@ RSpec.describe User, type: :model do
   end
 
   describe 'associations' do
-    it { is_expected.to have_many(:cats) } 
-    it { is_expected.to have_many(:requests) } 
+    it { is_expected.to have_many(:cats) }
+    it { is_expected.to have_many(:requests) }
   end
 
   describe 'class methods' do
-    
     describe '::confirm_credentials' do
-      
       before(:each) do
         user.save
       end
 
       context 'username and password match' do
         it 'returns user' do
-
           confirmed = User.confirm_credentials(user.username, user.password)
           expect(confirmed).to eq(user)
         end
       end
 
-      context "username and password do not match" do
+      context 'username and password do not match' do
         it 'returns nil' do
           unconfirmed = User.confirm_credentials(user.username, 'unmatched')
           expect(unconfirmed).to be_nil
         end
       end
-      
     end
 
     describe '#reset_session_token' do
@@ -69,7 +64,5 @@ RSpec.describe User, type: :model do
         expect(user.password_digest).not_to be_nil
       end
     end
-    
   end
-  
 end

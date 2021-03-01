@@ -1,15 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe CatsController, type: :controller do
-
   let(:user) { FactoryBot.create(:user) }
   let(:cat_saved) { FactoryBot.create(:cat, user_id: user.id) }
   let(:cat_unsaved) { FactoryBot.build(:cat, user_id: user.id) }
-  
+
   before(:each) do
     login(user)
   end
-  
+
   describe 'GET #index' do
     it 'renders the index page' do
       get :index
@@ -21,14 +20,14 @@ RSpec.describe CatsController, type: :controller do
   describe 'GET #show' do
     context 'cat exists' do
       it 'renders the show page' do
-        get :show, params: {id: cat_saved.id}
+        get :show, params: { id: cat_saved.id }
         expect(response).to render_template(:show)
         expect(response).to be_successful
       end
-    end    
+    end
     context 'cat does not exist' do
       it 'redirects to index page' do
-        get :show, params: {id: -1}
+        get :show, params: { id: -1 }
         expect(response).to redirect_to(cats_url)
       end
     end
@@ -36,7 +35,7 @@ RSpec.describe CatsController, type: :controller do
 
   describe 'GET #new' do
     let(:call_action) { get :new }
-    it_behaves_like 'an action requiring logged in user'    
+    it_behaves_like 'an action requiring logged in user'
     it 'renders new cat form page' do
       get :new
       expect(response).to render_template(:new)
@@ -54,7 +53,7 @@ RSpec.describe CatsController, type: :controller do
       it 'shows success message' do
         expect(flash[:success]).to eq('You have succesfully added a new cat')
       end
-      it 'redirects to show page of new cat'do
+      it 'redirects to show page of new cat' do
         expect(response).to redirect_to(cat_url(Cat.find_by(name: 'Valid_cat')))
       end
     end
@@ -120,6 +119,4 @@ RSpec.describe CatsController, type: :controller do
       end
     end
   end
-
 end
-

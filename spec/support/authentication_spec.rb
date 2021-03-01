@@ -16,7 +16,7 @@ shared_examples_for 'an action requiring logged in user' do
       user.reset_session_token
       call_action
     end
- 
+
     it 'displays not logged in message' do
       expect(flash[:danger]).to eq('You have to be logged in to access that section')
     end

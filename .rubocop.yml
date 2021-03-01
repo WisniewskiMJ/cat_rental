@@ -10,6 +10,10 @@ AllCops:
     - 'test/**/*'
     - !ruby/regexp /old_and_unused\.rb$/
 
+Metric/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
 Style/Documentation:
     Enabled: false
 
