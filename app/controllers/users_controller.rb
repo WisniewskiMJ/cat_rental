@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       email = UserMailer.welcome_email(@user)
       email.deliver
       flash[:success] = 'Your account has been created'
-      redirect_to cats_url
+      redirect_to user_url(@user)
     else
       flash.now[:danger] = @user.errors.full_messages.to_sentence
       render :new
@@ -30,11 +30,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = current_user
-    if @user
+    @user = User.find_by(id: params[:id])
+    if @user == current_user
       render :edit
     else
-      redirect to cats_url
+      redirect_to cats_url
     end
   end
 
@@ -43,8 +43,10 @@ class UsersController < ApplicationController
     return unless @user
 
     if @user.update(user_params)
+      flash[:success] = 'Your account has been succesfully updated'
       redirect_to user_url
     else
+      flash.now[:danger] = @user.errors.full_messages.to_sentence
       render :edit
     end
   end

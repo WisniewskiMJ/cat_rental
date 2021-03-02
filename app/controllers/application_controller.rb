@@ -12,7 +12,10 @@ class ApplicationController < ActionController::Base
   private
 
   def require_no_user
-    redirect_to cats_url if current_user
+    return unless current_user
+
+    flash[:danger] = 'You can not perform that action while logged in'
+    redirect_to cats_url
   end
 
   def require_user
