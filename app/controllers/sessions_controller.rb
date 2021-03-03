@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class SessionsController < ApplicationController
+  before_action :require_user, only: [:destroy]
   before_action :require_no_user, except: [:destroy]
 
   def new; end
@@ -11,7 +12,7 @@ class SessionsController < ApplicationController
     if @user
       login(@user)
       flash[:success] = 'You have been logged in'
-      redirect_to cats_url
+      redirect_to user_url(@user)
     else
       flash.now[:danger] = "Username and password doesn't match"
       render :new
