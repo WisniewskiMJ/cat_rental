@@ -130,3 +130,21 @@ def edit_user(id,username, email, password)
     click_on 'Submit'
   end
 end
+
+def create_cat(name, birth_date, color, sex, description)
+  visit new_cat_url
+  fill_in 'cat[name]', with: name
+  fill_in 'cat[birth_date]', with: birth_date
+  select color, from: 'cat[color]'
+  choose 'cat[sex]', option: sex
+  fill_in 'cat[description]', with: description
+  click_on 'Add cat'
+end
+
+def rent_cat(name, start_date, end_date)
+  visit new_cat_rental_request_url
+  select name, from: 'cat_rental_request[cat_id]'
+  fill_in 'cat_rental_request[start_date]', with: start_date
+  fill_in 'cat_rental_request[end_date]', with: end_date
+  click_on 'Send request'
+end
