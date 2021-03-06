@@ -8,14 +8,14 @@ RSpec.describe SessionsController, type: :controller do
     it_behaves_like 'an action requiring no logged in user'
     it 'renders login user page' do
       get :new
-      expect(response).to render_template(:new)    
+      expect(response).to render_template(:new)
     end
   end
 
   describe 'POST #create' do
     context 'username and password matching' do
       before(:each) do
-        user_credentials = { user: { username: user[:username], password: 'password'} }
+        user_credentials = { user: { username: user[:username], password: 'password' } }
         post :create, params: user_credentials
       end
       it 'displays success message' do
@@ -47,5 +47,4 @@ RSpec.describe SessionsController, type: :controller do
       expect(response).to redirect_to(cats_url)
     end
   end
-  
 end

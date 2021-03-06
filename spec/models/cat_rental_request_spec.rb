@@ -22,7 +22,7 @@ RSpec.describe CatRentalRequest, type: :model do
     end
 
     it 'validates start_date not in the past' do
-      request.start_date = Date.today.last_week
+      request.start_date = Time.zone.today.last_week
       request.valid?
       expect(request.errors[:start_date]).to eq(['can not be in the past'])
     end

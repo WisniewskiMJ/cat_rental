@@ -93,15 +93,13 @@ RSpec.configure do |config|
   #   Kernel.srand config.seed
 end
 
-
 # helper method for unit tests
 def login(user)
   user.reset_session_token
   session[:session_token] = user.session_token
 end
 
-
-#helper methods for capybara tests
+# helper methods for capybara tests
 def create_user(username, email, password)
   visit new_user_url
   fill_in 'user[username]', with: username
@@ -114,14 +112,14 @@ end
 
 def login_user(username, password)
   visit new_session_url
-      fill_in 'user[username]', with: username
-      fill_in 'user[password]', with: password
-      within '.box' do
-        click_on 'Log in'
-      end
+  fill_in 'user[username]', with: username
+  fill_in 'user[password]', with: password
+  within '.box' do
+    click_on 'Log in'
+  end
 end
 
-def edit_user(id,username, email, password)
+def edit_user(id, username, email, password)
   visit edit_user_url(id)
   fill_in 'user[username]', with: username
   fill_in 'user[email]', with: email

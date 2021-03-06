@@ -23,7 +23,7 @@ shared_examples_for 'an action requiring logged in user' do
     end
   end
 end
-    
+
 shared_examples_for 'an action requiring no logged in user' do
   let(:user) { FactoryBot.create(:user) }
 

@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 feature 'user features', type: :feature do
-
   let(:user) { FactoryBot.create(:user) }
 
   feature 'visiting main page' do
@@ -10,7 +9,7 @@ feature 'user features', type: :feature do
       expect(page).to have_content('All cats')
     end
   end
-  
+
   feature 'registering new user' do
     scenario 'gets new user form' do
       visit cats_url
@@ -72,9 +71,9 @@ feature 'user features', type: :feature do
   feature 'processing requests' do
     scenario 'approves request' do
       login_user(user.username, 'password')
-      create_cat('Valid_cat', '01/01/2020', 'grey', 'F','Description of a cat')
-      rent_cat('Valid_cat', Date.tomorrow, Date.today.next_week)
-      rent_cat('Valid_cat', Date.tomorrow, Date.today.next_week)
+      create_cat('Valid_cat', '01/01/2020', 'grey', 'F', 'Description of a cat')
+      rent_cat('Valid_cat', Date.tomorrow, Time.zone.today.next_week)
+      rent_cat('Valid_cat', Date.tomorrow, Time.zone.today.next_week)
       cat = Cat.find_by(name: 'Valid_cat')
       visit cat_url(cat.id)
       first(:link, 'Accept').click
@@ -82,9 +81,9 @@ feature 'user features', type: :feature do
     end
     scenario 'denies request' do
       login_user(user.username, 'password')
-      create_cat('Valid_cat', '01/01/2020', 'grey', 'F','Description of a cat')
-      rent_cat('Valid_cat', Date.tomorrow, Date.today.next_week)
-      rent_cat('Valid_cat', Date.tomorrow, Date.today.next_week)
+      create_cat('Valid_cat', '01/01/2020', 'grey', 'F', 'Description of a cat')
+      rent_cat('Valid_cat', Date.tomorrow, Time.zone.today.next_week)
+      rent_cat('Valid_cat', Date.tomorrow, Time.zone.today.next_week)
       cat = Cat.find_by(name: 'Valid_cat')
       visit cat_url(cat.id)
       first(:link, 'Reject').click
