@@ -13,11 +13,11 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bulma-rails', '~> 0.9.1'
 gem 'email_validator', '~> 2.2', '>= 2.2.2', require: 'email_validator/strict'
+gem 'faker', '~> 2.16'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rubocop-rails', require: false
-  gem 'faker', '~> 2.16'
   gem 'spring'
 end
 
@@ -32,7 +32,6 @@ group :development do
   gem 'spring-commands-rspec'
   gem 'rspec-rails'
   gem 'factory_bot_rails'
-  gem 'rails-controller-testing'
   gem 'guard-rspec'
 end
 
@@ -42,6 +41,7 @@ group :test do
   gem 'chromedriver-helper'
   gem 'launchy'
   gem 'shoulda-matchers', '~> 4.0'
+   gem 'rails-controller-testing'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
