@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -17,7 +15,7 @@ gem 'bulma-rails', '~> 0.9.1'
 gem 'email_validator', '~> 2.2', '>= 2.2.2', require: 'email_validator/strict'
 
 group :development, :test do
-  gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rubocop-rails', require: false
   gem 'faker', '~> 2.16'
   gem 'spring'
@@ -44,7 +42,6 @@ group :test do
   gem 'chromedriver-helper'
   gem 'launchy'
   gem 'shoulda-matchers', '~> 4.0'
-  gem 'rails-controller-testing'
 end
 
-gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
