@@ -1,21 +1,5 @@
 <header class="navbar is-tertiary">
     <div class="navbar-end">
-    <% if current_user %>
-      <h2 class="navbar-item has-text-white">Hi <%= current_user.username %>!</h2>
-      <div class="navbar-item">
-        <%= link_to 'My account', user_url(current_user), class: 'button is-small is-secondary' %>
-      </div>
-      <%= form_with url: session_url, method: :post, class: 'navbar-item' do |form| %>
-        <%= form.hidden_field '_method', value: :delete %>
-        <%= form.submit 'Log out', class: 'button is-small is-secondary' %>
-      <% end %>
-    <% else %>
-      <div class="navbar-item">
-        <%= link_to 'Register', new_user_url, class: 'button is-small is-secondary' %>
-      </div>
-      <div class="navbar-item">
-        <%= link_to 'Log in', new_session_url, class: 'button is-small is-secondary' %>
-      </div>
-  <% end %>
+      <%= navbar_items %>
     </div>
 </header>

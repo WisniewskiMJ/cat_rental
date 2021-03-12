@@ -1,7 +1,0 @@
-  <% requests.each do |request| %>
-    <% if page == :cat %>
-      <%= render 'cat_rental_requests/user_details_request', request: request, user: request.requester %>
-    <% else %>
-      <%= render 'cat_rental_requests/cat_details_request', request: request, cat: request.cat %>
-    <% end %>
-  <% end %>

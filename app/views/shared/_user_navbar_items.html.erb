@@ -1,0 +1,8 @@
+      <h2 class="navbar-item has-text-white">Hi <%= current_user.username %>!</h2>
+      <div class="navbar-item">
+        <%= link_to 'My account', user_url(current_user), class: 'button is-small is-secondary' %>
+      </div>
+      <%= form_with url: session_url, method: :post, class: 'navbar-item' do |form| %>
+        <%= form.hidden_field '_method', value: :delete %>
+        <%= form.submit 'Log out', class: 'button is-small is-secondary' %>
+      <% end %>

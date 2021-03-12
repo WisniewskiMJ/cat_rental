@@ -1,18 +1,6 @@
 <%= form_with url: cat_rental_requests_url, method: :post do |form|%>
-  
-  <% if !@cat %>
-    <div class="field">
-      <%= form.label 'cat_id', "Select a cat", class: 'label' %>
-      <div class="control">
-        <div class="select">
-          <%= form.collection_select 'cat_rental_request[cat_id]', cats, :id, :name, prompt: "-pick one-" %>
-        </div>
-      </div>
-    </div>
-  <% else %>
-    <%= tag.h2 cats.find(@cat.id).name, class: 'title is-2' %>
-    <%= form.hidden_field 'cat_rental_request[cat_id]', value: @cat.id %>
-  <% end %>
+
+  <%= rental_form_cat_name(cat, cats, form) %>
 
   <div class="field">
     <%= form.label 'start_date', "Start date", class: 'label' %>

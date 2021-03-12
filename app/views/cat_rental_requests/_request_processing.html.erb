@@ -1,0 +1,4 @@
+<%= link_to 'Accept', approve_cat_rental_request_url(id: request.id), 
+  method: :post, class: 'button is-small is-rounded' %>
+<%= link_to 'Reject', deny_cat_rental_request_url(id: request.id), 
+  method: :post, class: 'button is-small is-rounded' %>

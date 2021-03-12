@@ -9,8 +9,7 @@
 
     <div class="block column">
       <h1 class="title is-4">My requests:</h1>
-      <% requests = @user.requests.order(:start_date) %>
-      <%= render 'shared/requests', requests: requests, page: :user %>
+      <%= requests(@user, :user) %>
     </div>
 
   </div>

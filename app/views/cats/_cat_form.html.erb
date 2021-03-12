@@ -1,11 +1,3 @@
-<% if kitty.persisted?  %>
-  <% action_url = cat_url(kitty) %>
-  <% method = :patch %>
-<% else %>
-  <% action_url = cats_url %>
-  <% method = :post %>
-<% end %>
-
 <%= form_with url: action_url, method: :post, local: true do |form| %>
 
   <%= form.hidden_field '_method', value: method %>
@@ -14,14 +6,14 @@
   <div class="field">
     <%= form.label 'name', 'Name', class: 'label' %>
     <div class="control">
-      <%= form.text_field 'cat[name]', value: kitty.name, class: 'input half-width' %>
+      <%= form.text_field 'cat[name]', value: cat.name, class: 'input half-width' %>
     </div>
   </div>
 
   <div class="field">
     <%= form.label 'birth_date', 'Birth date', class: 'label' %>
     <div class="control">
-      <%= form.date_field 'cat[birth_date]', value: kitty.birth_date, class: 'date input' %>
+      <%= form.date_field 'cat[birth_date]', value: cat.birth_date, class: 'date input' %>
     </div>
   </div>
 
@@ -30,7 +22,7 @@
     <div class="control">
       <div class="select">
         <% colors = Cat::COLORS.map { |color| color } %>
-        <%= form.select 'cat[color]', colors, prompt: '- pick color -', selected: kitty.color %>
+        <%= form.select 'cat[color]', colors, prompt: '- pick color -', selected: cat.color %>
       </div>
     </div>
   </div>
@@ -38,16 +30,16 @@
   <div class="field">
     <%= form.label 'sex', 'Sex', class: 'label' %>
     <%= form.label 'M', 'M', class: 'radio has-text-weight-semibold' %>
-    <%= form.radio_button 'cat[sex]', 'M', checked: kitty.sex == 'M'%>
+    <%= form.radio_button 'cat[sex]', 'M', checked: cat.sex == 'M'%>
     <%= form.label 'F', 'F', class: 'radio has-text-weight-semibold' %>
-    <%= form.radio_button 'cat[sex]', 'F', checked: kitty.sex == 'F' %>
+    <%= form.radio_button 'cat[sex]', 'F', checked: cat.sex == 'F' %>
   </div>
 
   <div class="field">
     <label class="label" for="description">Description</label>
-    <%= form.text_area 'cat[description]', value: kitty.description, class: 'textarea half-width' %>
+    <%= form.text_area 'cat[description]', value: cat.description, class: 'textarea half-width' %>
   </div>
 
-  <%= form.submit action == :edit ? 'Update cat' : 'Add cat', class: 'button is-small is-secondary' %>
+  <%= form.submit submit, class: 'button is-small is-secondary' %>
 
 <% end %>

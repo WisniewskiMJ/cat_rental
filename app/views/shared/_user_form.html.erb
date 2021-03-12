@@ -1,12 +1,3 @@
-<% case action %>
-  <% when :register %>
-    <% action_url, method, submit, password_label = [users_url, :post, 'Register', 'Password (min. 6 characters)'] %>
-  <% when :login %>
-    <% action_url, method, submit, password_label = [session_url, :post, 'Log in', 'Password'] %>
-  <% when :edit %>
-    <% action_url, method, submit, password_label = [user_url, :patch, 'Submit', 'New password'] %>
-<% end %>
-
 <%= form_with url: action_url, method: :post, local: true do |form| %>
 
   <%= form.hidden_field '_method', value: method %>

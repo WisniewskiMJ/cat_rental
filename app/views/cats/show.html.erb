@@ -29,24 +29,15 @@
       </table>
 
       <div class="block pt-2">
-        <% requests = @cat.rental_requests.order(:start_date) %>
-        <% if !requests.empty? %>
           <h3 class="subtitle">Rental requests:</h3>
-          <%= render 'shared/requests', requests: requests, page: :cat %> 
-        <% end %>
+          <%= requests(@cat, :cat) %>
       </div>
     </div>
   </div>
 
 
   <div class="level">
-    <% if current_user %>
-      <%= link_to 'Rent', new_cat_rental_request_url(cat_id: @cat.id), class: "button is-small is-secondary m-1" %>
-    <% end %>
-
-      <% if current_user && current_user.id == @cat.owner.id %>
-        <%= link_to 'Edit cat', edit_cat_url(@cat), class: "button is-small is-secondary m-1" %>
-      <% end %>
+    <%= cat_processing(@cat) %>
   </div>
 <% end %>
  

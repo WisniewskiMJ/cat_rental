@@ -1,0 +1,8 @@
+<div class="field">
+  <%= form.label 'cat_id', "Select a cat", class: 'label' %>
+  <div class="control">
+    <div class="select">
+      <%= form.collection_select 'cat_rental_request[cat_id]', cats, :id, :name, prompt: "-pick one-" %>
+    </div>
+  </div>
+</div>

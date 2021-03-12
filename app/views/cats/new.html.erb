@@ -1,3 +1,3 @@
 <%= render layout: 'shared/boxed', locals: {title: 'Add a new cat'} do %>
-  <%= render 'form', kitty: @cat, action: :new %>
+  <%= cat_form(@cat, :new) %>
 <% end %>
