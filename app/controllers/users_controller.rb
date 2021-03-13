@@ -10,8 +10,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       login(@user)
-      email = UserMailer.welcome_email(@user)
-      email.deliver
+      # email = UserMailer.welcome_email(@user)
+      # email.deliver
       flash[:success] = 'Your account has been created'
       redirect_to user_url(@user)
     else
