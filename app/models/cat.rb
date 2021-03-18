@@ -19,4 +19,6 @@ class Cat < ApplicationRecord
   has_many :rental_requests,
            class_name: :CatRentalRequest,
            dependent: :destroy
+
+  has_one_attached :pic
 end

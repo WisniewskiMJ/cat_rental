@@ -3,8 +3,7 @@
     <div class="media">
       <div class="media-left">
         <figure class="image is-64x64">
-          <% cat_images = ["cat1", "cat2", "cat3", "cat4", "cat5", "cat6"] %>
-          <%= image_tag "/images/#{cat_images.sample}.jpg", :alt => "cat", class: "cover" %>
+          <%= cat_image(cat) %>
         </figure>
       </div>
       <div class="media-content has-text-right">

@@ -36,10 +36,15 @@
   </div>
 
   <div class="field">
-    <label class="label" for="description">Description</label>
+    <%= form.label 'description', 'Description', class: 'label' %>
     <%= form.text_area 'cat[description]', value: cat.description, class: 'textarea half-width' %>
   </div>
 
-  <%= form.submit submit, class: 'button is-small is-secondary' %>
+  <div class="field">
+    <%= form.label 'pic', 'Add image:', class: 'label' %>
+    <%= form.file_field 'cat[pic]', direct_upload: true %>
+  </div>
+
+  <%= form.submit submit, class: 'button is-small is-secondary mt-6' %>
 
 <% end %>
