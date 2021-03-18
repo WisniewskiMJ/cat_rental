@@ -14,6 +14,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bulma-rails', '~> 0.9.1'
 gem 'email_validator', '~> 2.2', '>= 2.2.2', require: 'email_validator/strict'
 gem 'faker', '~> 2.16'
+gem 'cloudinary'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
