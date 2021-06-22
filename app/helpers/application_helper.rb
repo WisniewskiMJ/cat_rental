@@ -98,7 +98,7 @@ module ApplicationHelper
   end
 
   def cat_image(cat)
-    placeholder = "/images/cat_default.jpg"
+    placeholder = '/images/cat_default.jpg'
     if cat.pic.attached?
       render 'cats/cat_image', cat: cat, image: cat.pic
     else
